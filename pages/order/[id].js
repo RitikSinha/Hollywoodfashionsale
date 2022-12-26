@@ -245,7 +245,7 @@ function Order({ params }) {
                 </ListItem>
                 <ListItem>{paymentMethod}</ListItem>
                 <ListItem>
-                  Status: {isPaid ? `paid at ${paidAt}` : "not paid"}
+                  Status: {isPaid ? `paid online` : "not paid"}
                 </ListItem>
               </List>
             </Card>

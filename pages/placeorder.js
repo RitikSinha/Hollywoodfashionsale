@@ -40,8 +40,8 @@ function PlaceOrder() {
   const itemsPrice = round2(
     cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
   );
-  const shippingPrice = itemsPrice > 200 ? 0 : 15;
-  const taxPrice = round2(itemsPrice * 0.15);
+  const shippingPrice = itemsPrice > 200 ? 0 : 0;
+  const taxPrice = round2(itemsPrice * 0);
   const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
 
   useEffect(() => {
@@ -98,14 +98,19 @@ function PlaceOrder() {
       image: "https://manuarora.in/logo.png",
       handler: function (response) {
         // Validate payment at server - using webhooks is a better idea.
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
+        placeOrderHandler(
+          response.razorpay_order_id,
+          response.razorpay_payment_id,
+          response.razorpay_signature,
+          true
+        );
       },
       prefill: {
         name: userInfo.name,
         email: userInfo.email,
-        contact: "9999999999",
       },
     };
 
@@ -113,7 +118,12 @@ function PlaceOrder() {
     paymentObject.open();
   };
 
-  const placeOrderHandler = async () => {
+  const placeOrderHandler = async (
+    razorpayOrderId = "",
+    razorpayPaymentId = "",
+    razorpaySignature = "",
+    isPaid = false
+  ) => {
     closeSnackbar();
     try {
       setLoading(true);
@@ -127,6 +137,10 @@ function PlaceOrder() {
           shippingPrice,
           taxPrice,
           totalPrice,
+          razorpayOrderId,
+          razorpayPaymentId,
+          razorpaySignature,
+          isPaid,
         },
         {
           headers: {
