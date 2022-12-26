@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+body {
+  font-family: "Inter", sans-serif;
+}
+.margin {
+  margin-top: 100px;
+}
+.footer {
+  display: flex;
+  color: #fff;
+  background-color: #000;
+  align-items: center;
+  justify-content: space-around;
+}
+.footer div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.footer p {
+  text-align: left;
+}
+
+.footer a {
+  color: #fff;
+}
+
+.icon-box {
+  display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .footer {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .footer p {
+    align-items: center;
+  }
+}
