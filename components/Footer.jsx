@@ -3,6 +3,7 @@ import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="footer">
@@ -15,6 +16,13 @@ const Footer = () => {
           <strong>Address</strong>:Gautam Buddha Road, Chowk, Gaya - 823001,
           Kedarnath Market <br />
         </p>
+      </div>
+      <div>
+        <Link href="/privacy"> Privacy Pollicy</Link>
+        <Link href="/refundPolicy"> Refund Pollicy</Link>
+        <Link href="/shippingPolicy"> Shipping Pollicy</Link>
+        <Link href="/contact"> Contact</Link>
+        <Link href="/terms"> Terms and Conditions</Link>
       </div>
       <div>
         <h1>community exclusive</h1>

@@ -116,7 +116,7 @@ export default function Search(props) {
     <Layout title="search">
       <Grid sx={classes.section} container spacing={1}>
         <Grid item md={3}>
-          <List>
+          <List className="fillter">
             <ListItem>
               <Box sx={classes.fullWidth}>
                 <Typography>Categories</Typography>

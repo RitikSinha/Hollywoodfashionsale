@@ -38,4 +38,7 @@ body {
   .footer p {
     align-items: center;
   }
+  .fillter {
+    display: flex;
+  }
 }
