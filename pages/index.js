@@ -5,14 +5,21 @@ import db from "../utils/db";
 import Product from "../models/Product";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Store } from "../utils/Store";
 import ProductItem from "../components/ProductItem";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import classes from "../utils/classes";
+import Image from "next/image";
 
 export default function Home(props) {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  };
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
   const { topRatedProducts, featuredProducts } = props;
@@ -27,6 +34,10 @@ export default function Home(props) {
     dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
     router.push("/cart");
   };
+  useEffect(() => {
+    handleWindowResize();
+  }, []);
+
   return (
     <Layout>
       <Carousel>
@@ -37,7 +48,12 @@ export default function Home(props) {
             passHref
           >
             <Link sx={classes.flex}>
-              <img src={product.featuredImage} alt={product.name}></img>
+              <Image
+                src={product.featuredImage}
+                alt={product.name}
+                width={width}
+                height={height}
+              />
             </Link>
           </NextLink>
         ))}

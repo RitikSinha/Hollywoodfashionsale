@@ -1,21 +1,21 @@
-import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
-import classes from '../utils/classes';
-import { Store } from '../utils/Store';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import { CircularProgress, Box } from '@mui/material';
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import classes from "../utils/classes";
+import { Store } from "../utils/Store";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import { CircularProgress, Box } from "@mui/material";
 import {
   GoogleMap,
   LoadScript,
   Marker,
   StandaloneSearchBox,
-} from '@react-google-maps/api';
-import { getError } from '../utils/error';
+} from "@react-google-maps/api";
+import { getError } from "../utils/error";
 
 const defaultLocation = { lat: 45.516, lng: -73.56 };
-const libs = ['places'];
+const libs = ["places"];
 
 function Map() {
   const router = useRouter();
@@ -24,20 +24,21 @@ function Map() {
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
 
-  const [googleApiKey, setGoogleApiKey] = useState('');
+  const [googleApiKey, setGoogleApiKey] = useState("");
   useEffect(() => {
     const fetchGoogleApiKey = async () => {
       try {
-        const { data } = await axios('/api/keys/google', {
+        const { data } = await axios("/api/keys/google", {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
         setGoogleApiKey(data);
         getUserCurrentLocation();
       } catch (err) {
-        enqueueSnackbar(getError(err), { variant: 'error' });
+        enqueueSnackbar(getError(err), { variant: "error" });
       }
     };
     fetchGoogleApiKey();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [center, setCenter] = useState(defaultLocation);
@@ -45,8 +46,8 @@ function Map() {
 
   const getUserCurrentLocation = () => {
     if (!navigator.geolocation) {
-      enqueueSnackbar('Geolocation is not supported by this browser', {
-        variant: 'error',
+      enqueueSnackbar("Geolocation is not supported by this browser", {
+        variant: "error",
       });
     } else {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -88,7 +89,7 @@ function Map() {
     const places = placeRef.current.getPlaces();
     if (places && places.length === 1) {
       dispatch({
-        type: 'SAVE_SHIPPING_ADDRESS_MAP_LOCATION',
+        type: "SAVE_SHIPPING_ADDRESS_MAP_LOCATION",
         payload: {
           lat: location.lat,
           lng: location.lng,
@@ -98,10 +99,10 @@ function Map() {
           googleAddressId: places[0].id,
         },
       });
-      enqueueSnackbar('location selected successfully', {
-        variant: 'success',
+      enqueueSnackbar("location selected successfully", {
+        variant: "success",
       });
-      router.push('/shipping');
+      router.push("/shipping");
     }
   };
   const onMarkerLoad = (marker) => {
@@ -112,7 +113,7 @@ function Map() {
       <LoadScript libraries={libs} googleMapsApiKey={googleApiKey}>
         <GoogleMap
           id="sample-map"
-          mapContainerStyle={{ height: '100%', width: '100%' }}
+          mapContainerStyle={{ height: "100%", width: "100%" }}
           center={center}
           zoom={15}
           onLoad={onLoad}

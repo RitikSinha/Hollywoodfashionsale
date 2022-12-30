@@ -7,7 +7,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CancelIcon from "@mui/icons-material/Cancel";
-import SearchIcon from "@mui/icons-material/Search";
 import classes from "../utils/classes";
 import { getError } from "../utils/error";
 import Cookies from "js-cookie";
@@ -37,7 +36,6 @@ import {
   ListItem,
   Divider,
   ListItemText,
-  InputBase,
   TextField,
   InputAdornment,
 } from "@mui/material";
@@ -86,7 +84,6 @@ export default function Layout({ title, description, children }) {
   const router = useRouter();
 
   const [sidbarVisible, setSidebarVisible] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const sidebarOpenHandler = () => {
     setSidebarVisible(true);
   };
@@ -117,6 +114,7 @@ export default function Layout({ title, description, children }) {
 
   useEffect(() => {
     fetchCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // const darkModeChangeHandler = () => {

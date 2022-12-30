@@ -31,6 +31,7 @@ export default function Payment() {
     } else {
       setPaymentMethod(Cookies.get("paymentMethod") || "");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const submitHandler = (e) => {
     closeSnackbar();

@@ -51,6 +51,7 @@ function PlaceOrder() {
     if (cartItems.length === 0) {
       router.push("/cart");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { closeSnackbar, enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);

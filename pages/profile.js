@@ -1,8 +1,8 @@
-import axios from 'axios';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import NextLink from 'next/link';
-import React, { useEffect, useContext } from 'react';
+import axios from "axios";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import NextLink from "next/link";
+import React, { useEffect, useContext } from "react";
 import {
   Grid,
   List,
@@ -12,15 +12,15 @@ import {
   Button,
   ListItemText,
   TextField,
-} from '@mui/material';
-import { getError } from '../utils/error';
-import Form from '../components/Form';
-import { Store } from '../utils/Store';
-import Layout from '../components/Layout';
-import classes from '../utils/classes';
-import { Controller, useForm } from 'react-hook-form';
-import { useSnackbar } from 'notistack';
-import Cookies from 'js-cookie';
+} from "@mui/material";
+import { getError } from "../utils/error";
+import Form from "../components/Form";
+import { Store } from "../utils/Store";
+import Layout from "../components/Layout";
+import classes from "../utils/classes";
+import { Controller, useForm } from "react-hook-form";
+import { useSnackbar } from "notistack";
+import Cookies from "js-cookie";
 
 function Profile() {
   const { state, dispatch } = useContext(Store);
@@ -36,20 +36,21 @@ function Profile() {
 
   useEffect(() => {
     if (!userInfo) {
-      return router.push('/login');
+      return router.push("/login");
     }
-    setValue('name', userInfo.name);
-    setValue('email', userInfo.email);
+    setValue("name", userInfo.name);
+    setValue("email", userInfo.email);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const submitHandler = async ({ name, email, password, confirmPassword }) => {
     closeSnackbar();
     if (password !== confirmPassword) {
-      enqueueSnackbar("Passwords don't match", { variant: 'error' });
+      enqueueSnackbar("Passwords don't match", { variant: "error" });
       return;
     }
     try {
       const { data } = await axios.put(
-        '/api/users/profile',
+        "/api/users/profile",
         {
           name,
           email,
@@ -57,12 +58,12 @@ function Profile() {
         },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
-      dispatch({ type: 'USER_LOGIN', payload: data });
-      Cookies.set('userInfo', JSON.stringify(data));
+      dispatch({ type: "USER_LOGIN", payload: data });
+      Cookies.set("userInfo", JSON.stringify(data));
 
-      enqueueSnackbar('Profile updated successfully', { variant: 'success' });
+      enqueueSnackbar("Profile updated successfully", { variant: "success" });
     } catch (err) {
-      enqueueSnackbar(getError(err), { variant: 'error' });
+      enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
   return (
@@ -110,14 +111,14 @@ function Profile() {
                             fullWidth
                             id="name"
                             label="Name"
-                            inputProps={{ type: 'name' }}
+                            inputProps={{ type: "name" }}
                             error={Boolean(errors.name)}
                             helperText={
                               errors.name
-                                ? errors.name.type === 'minLength'
-                                  ? 'Name length is more than 1'
-                                  : 'Name is required'
-                                : ''
+                                ? errors.name.type === "minLength"
+                                  ? "Name length is more than 1"
+                                  : "Name is required"
+                                : ""
                             }
                             {...field}
                           ></TextField>
@@ -139,14 +140,14 @@ function Profile() {
                             fullWidth
                             id="email"
                             label="Email"
-                            inputProps={{ type: 'email' }}
+                            inputProps={{ type: "email" }}
                             error={Boolean(errors.email)}
                             helperText={
                               errors.email
-                                ? errors.email.type === 'pattern'
-                                  ? 'Email is not valid'
-                                  : 'Email is required'
-                                : ''
+                                ? errors.email.type === "pattern"
+                                  ? "Email is not valid"
+                                  : "Email is required"
+                                : ""
                             }
                             {...field}
                           ></TextField>
@@ -160,9 +161,9 @@ function Profile() {
                         defaultValue=""
                         rules={{
                           validate: (value) =>
-                            value === '' ||
+                            value === "" ||
                             value.length > 5 ||
-                            'Password length is more than 5',
+                            "Password length is more than 5",
                         }}
                         render={({ field }) => (
                           <TextField
@@ -170,12 +171,12 @@ function Profile() {
                             fullWidth
                             id="password"
                             label="Password"
-                            inputProps={{ type: 'password' }}
+                            inputProps={{ type: "password" }}
                             error={Boolean(errors.password)}
                             helperText={
                               errors.password
-                                ? 'Password length is more than 5'
-                                : ''
+                                ? "Password length is more than 5"
+                                : ""
                             }
                             {...field}
                           ></TextField>
@@ -189,9 +190,9 @@ function Profile() {
                         defaultValue=""
                         rules={{
                           validate: (value) =>
-                            value === '' ||
+                            value === "" ||
                             value.length > 5 ||
-                            'Confirm Password length is more than 5',
+                            "Confirm Password length is more than 5",
                         }}
                         render={({ field }) => (
                           <TextField
@@ -199,12 +200,12 @@ function Profile() {
                             fullWidth
                             id="confirmPassword"
                             label="Confirm Password"
-                            inputProps={{ type: 'password' }}
+                            inputProps={{ type: "password" }}
                             error={Boolean(errors.confirmPassword)}
                             helperText={
                               errors.password
-                                ? 'Confirm Password length is more than 5'
-                                : ''
+                                ? "Confirm Password length is more than 5"
+                                : ""
                             }
                             {...field}
                           ></TextField>
