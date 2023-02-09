@@ -70,6 +70,45 @@ function PlaceOrder() {
       document.body.appendChild(script);
     });
   };
+  const placeOrderHandler = async (
+    razorpayOrderId = "",
+    razorpayPaymentId = "",
+    razorpaySignature = "",
+    isPaid = false
+  ) => {
+    closeSnackbar();
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        "/api/orders",
+        {
+          orderItems: cartItems,
+          shippingAddress,
+          paymentMethod,
+          itemsPrice,
+          shippingPrice,
+          taxPrice,
+          totalPrice,
+          razorpayOrderId,
+          razorpayPaymentId,
+          razorpaySignature,
+          isPaid,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+      dispatch({ type: "CART_CLEAR" });
+      Cookies.remove("cartItems");
+      setLoading(false);
+      router.push(`/order/${data._id}`);
+    } catch (err) {
+      setLoading(false);
+      enqueueSnackbar(getError(err), { variant: "error" });
+    }
+  };
   const makePayment = async () => {
     const res = await initializeRazorpay();
 
@@ -119,45 +158,6 @@ function PlaceOrder() {
     paymentObject.open();
   };
 
-  const placeOrderHandler = async (
-    razorpayOrderId = "",
-    razorpayPaymentId = "",
-    razorpaySignature = "",
-    isPaid = false
-  ) => {
-    closeSnackbar();
-    try {
-      setLoading(true);
-      const { data } = await axios.post(
-        "/api/orders",
-        {
-          orderItems: cartItems,
-          shippingAddress,
-          paymentMethod,
-          itemsPrice,
-          shippingPrice,
-          taxPrice,
-          totalPrice,
-          razorpayOrderId,
-          razorpayPaymentId,
-          razorpaySignature,
-          isPaid,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
-      dispatch({ type: "CART_CLEAR" });
-      Cookies.remove("cartItems");
-      setLoading(false);
-      router.push(`/order/${data._id}`);
-    } catch (err) {
-      setLoading(false);
-      enqueueSnackbar(getError(err), { variant: "error" });
-    }
-  };
   return (
     <Layout title="Place Order">
       <CheckoutWizard activeStep={3}></CheckoutWizard>

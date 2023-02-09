@@ -1,7 +1,7 @@
-import nc from 'next-connect';
-import { isAdmin, isAuth } from '../../../../utils/auth';
-import Product from '../../../../models/Product';
-import db from '../../../../utils/db';
+import nc from "next-connect";
+import { isAdmin, isAuth } from "../../../../utils/auth";
+import Product from "../../../../models/Product";
+import db from "../../../../utils/db";
 
 const handler = nc();
 handler.use(isAuth, isAdmin);
@@ -16,21 +16,25 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   await db.connect();
   const newProduct = new Product({
-    name: 'sample name',
-    slug: 'sample-slug-' + Math.random(),
-    image: '/images/shirt1.jpg',
+    name: "sample name",
+    slug: "sample-slug-" + Math.random(),
+    image: "/images/shirt1.jpg",
+    image1: "/images/shirt1.jpg",
+    image2: "/images/shirt1.jpg",
+    image3: "/images/shirt1.jpg",
+    image4: "/images/shirt1.jpg",
     price: 0,
-    category: 'sample category',
-    brand: 'sample brand',
+    category: "sample category",
+    brand: "sample brand",
     countInStock: 0,
-    description: 'sample description',
+    description: "sample description",
     rating: 0,
     numReviews: 0,
   });
 
   const product = await newProduct.save();
   await db.disconnect();
-  res.send({ message: 'Product Created', product });
+  res.send({ message: "Product Created", product });
 });
 
 export default handler;

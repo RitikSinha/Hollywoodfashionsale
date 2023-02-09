@@ -67,9 +67,10 @@ export default function Payment() {
                 ></FormControlLabel>
 
                 <FormControlLabel
-                  label="Cash"
+                  label="COD is not available"
                   value="Cash"
                   control={<Radio />}
+                  disabled={true}
                 ></FormControlLabel>
               </RadioGroup>
             </FormControl>

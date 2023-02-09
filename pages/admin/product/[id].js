@@ -88,6 +88,10 @@ function ProductEdit({ params }) {
           setValue("slug", data.slug);
           setValue("price", data.price);
           setValue("image", data.image);
+          setValue("image1", data.image1);
+          setValue("image2", data.image2);
+          setValue("image3", data.image3);
+          setValue("image4", data.image4);
           setValue("featuredImage", data.featuredImage);
           setIsFeatured(data.isFeatured);
           setValue("category", data.category);
@@ -129,6 +133,10 @@ function ProductEdit({ params }) {
     price,
     category,
     image,
+    image1,
+    image2,
+    image3,
+    image4,
     featuredImage,
     brand,
     countInStock,
@@ -145,6 +153,10 @@ function ProductEdit({ params }) {
           price,
           category,
           image,
+          image1,
+          image2,
+          image3,
+          image4,
           isFeatured,
           featuredImage,
           brand,
@@ -296,6 +308,38 @@ function ProductEdit({ params }) {
                       <Button variant="contained" component="label">
                         Upload File
                         <input type="file" onChange={uploadHandler} hidden />
+                      </Button>
+                      {loadingUpload && <CircularProgress />}
+                    </ListItem>
+                    <ListItem>
+                      <Controller
+                        name="image1"
+                        control={control}
+                        defaultValue=""
+                        rules={{
+                          required: false,
+                        }}
+                        render={({ field }) => (
+                          <TextField
+                            variant="outlined"
+                            fullWidth
+                            id="image1"
+                            label="Image"
+                            error={Boolean(errors.image)}
+                            helperText={errors.image ? "Image is required" : ""}
+                            {...field}
+                          ></TextField>
+                        )}
+                      ></Controller>
+                    </ListItem>
+                    <ListItem>
+                      <Button variant="contained" component="label">
+                        Upload File
+                        <input
+                          type="file"
+                          onChange={(e) => uploadHandler(e, "image1")}
+                          hidden
+                        />
                       </Button>
                       {loadingUpload && <CircularProgress />}
                     </ListItem>

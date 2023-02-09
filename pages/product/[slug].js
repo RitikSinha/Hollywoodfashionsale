@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import NextLink from "next/link";
+import { Carousel } from "react-responsive-carousel";
 import Image from "next/image";
+
 import {
   Grid,
   Link,
@@ -100,13 +102,70 @@ export default function ProductScreen(props) {
       </Box>
       <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
-          <Image
-            src={product.image}
-            alt={product.name}
-            width={640}
-            height={640}
-            layout="responsive"
-          ></Image>
+          <Carousel>
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={640}
+              height={640}
+              layout="responsive"
+            ></Image>
+            {product.image1 ? (
+              <Image
+                src={product?.image1}
+                alt={product.name}
+                width={640}
+                height={640}
+                layout="responsive"
+              ></Image>
+            ) : (
+              <></>
+            )}
+            {product.image1 ? (
+              <Image
+                src={product?.image1}
+                alt={product.name}
+                width={640}
+                height={640}
+                layout="responsive"
+              ></Image>
+            ) : (
+              <></>
+            )}
+            {product.image2 ? (
+              <Image
+                src={product?.image1}
+                alt={product.name}
+                width={640}
+                height={640}
+                layout="responsive"
+              ></Image>
+            ) : (
+              <></>
+            )}
+            {product.image3 ? (
+              <Image
+                src={product?.image1}
+                alt={product.name}
+                width={640}
+                height={640}
+                layout="responsive"
+              ></Image>
+            ) : (
+              <></>
+            )}
+            {product.image4 ? (
+              <Image
+                src={product?.image1}
+                alt={product.name}
+                width={640}
+                height={640}
+                layout="responsive"
+              ></Image>
+            ) : (
+              <></>
+            )}
+          </Carousel>
         </Grid>
         <Grid item md={3} xs={12}>
           <List>

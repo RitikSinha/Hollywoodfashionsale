@@ -118,7 +118,7 @@ function OrderHistory() {
                             <TableCell>{order.createdAt}</TableCell>
                             <TableCell>₹{order.totalPrice}</TableCell>
                             <TableCell>
-                              {order.isPaid ? `paid online` : "not paid"}
+                              {order.isPaid ? "Paid Online" : "not paid"}
                             </TableCell>
                             <TableCell>
                               {order.isDelivered

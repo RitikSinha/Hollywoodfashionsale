@@ -134,9 +134,7 @@ function AdminOrders() {
                             <TableCell>{order.createdAt}</TableCell>
                             <TableCell>₹{order.totalPrice}</TableCell>
                             <TableCell>
-                              {order.isPaid
-                                ? `paid at ${order.paidAt}`
-                                : "not paid"}
+                              {order.isPaid ? `paid Online` : "not paid"}
                             </TableCell>
                             <TableCell>
                               {order.isDelivered

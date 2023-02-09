@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { Grid, Link, Typography } from "@mui/material";
+import { Grid, Link, Typography, Avatar } from "@mui/material";
 import Layout from "../components/Layout";
 import db from "../utils/db";
 import Product from "../models/Product";
@@ -22,7 +22,7 @@ export default function Home(props) {
   };
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
-  const { topRatedProducts, featuredProducts } = props;
+  const { topRatedProducts, featuredProducts, newArrivalProducts } = props;
   const addToCartHandler = async (product) => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
@@ -59,9 +59,54 @@ export default function Home(props) {
         ))}
       </Carousel>
 
-      <Typography variant="h2">new arrivals</Typography>
       <Grid container spacing={3}>
-        {topRatedProducts.map((product) => (
+        <Grid item md={2}>
+          <NextLink href="search?category=Jeans" passHref>
+            <Avatar sx={{ bgcolor: "#121212", width: 100, height: 100 }}>
+              Jeans
+            </Avatar>
+          </NextLink>
+        </Grid>
+        <Grid item md={2}>
+          <NextLink href="search?category=shirts" passHref>
+            <Avatar sx={{ bgcolor: "#121212", width: 100, height: 100 }}>
+              Shirts
+            </Avatar>
+          </NextLink>
+        </Grid>
+        <Grid item md={2}>
+          <NextLink href="search?category=t-shirt" passHref>
+            <Avatar sx={{ bgcolor: "#121212", width: 100, height: 100 }}>
+              T-Shirts
+            </Avatar>
+          </NextLink>
+        </Grid>
+        <Grid item md={2}>
+          <NextLink href="search?category=lower" passHref>
+            <Avatar sx={{ bgcolor: "#121212", width: 100, height: 100 }}>
+              Lower
+            </Avatar>
+          </NextLink>
+        </Grid>
+        <Grid item md={2}>
+          <NextLink href="search?category=cap" passHref>
+            <Avatar sx={{ bgcolor: "#121212", width: 100, height: 100 }}>
+              Cap
+            </Avatar>
+          </NextLink>
+        </Grid>
+        <Grid item md={2}>
+          <NextLink href="search?category=shoes" passHref>
+            <Avatar sx={{ bgcolor: "#121212", width: 100, height: 100 }}>
+              Shoes
+            </Avatar>
+          </NextLink>
+        </Grid>
+      </Grid>
+
+      <Typography variant="h2">new Arrival</Typography>
+      <Grid container spacing={3}>
+        {newArrivalProducts.map((product) => (
           <Grid item md={4} key={product.name}>
             <ProductItem
               product={product}
@@ -93,6 +138,10 @@ export async function getServerSideProps() {
   )
     .lean()
     .limit(3);
+  const newArrivalProductsDocs = await Product.find({}, "-reviews")
+    .sort({})
+    .lean()
+    .limit(6);
   const topRatedProductsDocs = await Product.find({}, "-reviews")
     .lean()
     .sort({
@@ -104,6 +153,7 @@ export async function getServerSideProps() {
     props: {
       featuredProducts: featuredProductsDocs.map(db.convertDocToObj),
       topRatedProducts: topRatedProductsDocs.map(db.convertDocToObj),
+      newArrivalProducts: newArrivalProductsDocs.map(db.convertDocToObj),
     },
   };
 }

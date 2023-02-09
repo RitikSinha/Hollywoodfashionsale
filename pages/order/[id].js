@@ -25,7 +25,7 @@ import { useRouter } from "next/router";
 import classes from "../../utils/classes";
 import { useSnackbar } from "notistack";
 import { getError } from "../../utils/error";
-import { usePayPalScriptReducer } from "@paypal/react-paypal-js";
+// import { usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -63,7 +63,7 @@ function reducer(state, action) {
 
 function Order({ params }) {
   const orderId = params.id;
-  const [paypalDispatch] = usePayPalScriptReducer();
+  // const [paypalDispatch] = usePayPalScriptReducer();
 
   const router = useRouter();
   const { state } = useContext(Store);
@@ -119,20 +119,20 @@ function Order({ params }) {
         dispatch({ type: "DELIVER_RESET" });
       }
     } else {
-      const loadPaypalScript = async () => {
-        const { data: clientId } = await axios.get("/api/keys/paypal", {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
-        paypalDispatch({
-          type: "resetOptions",
-          value: {
-            "client-id": clientId,
-            currency: "USD",
-          },
-        });
-        paypalDispatch({ type: "setLoadingStatus", value: "pending" });
-      };
-      loadPaypalScript();
+      // const loadPaypalScript = async () => {
+      //   const { data: clientId } = await axios.get("/api/keys/paypal", {
+      //     headers: { authorization: `Bearer ${userInfo.token}` },
+      //   });
+      //   paypalDispatch({
+      //     type: "resetOptions",
+      //     value: {
+      //       "client-id": clientId,
+      //       currency: "USD",
+      //     },
+      //   });
+      //   paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+      // };
+      // loadPaypalScript();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, successPay, successDeliver]);
@@ -192,7 +192,7 @@ function Order({ params }) {
       enqueueSnackbar(getError(err), { variant: "error" });
     }
   }
-
+  console.log(" deliver", userInfo.isAdmin, order.isPaid, !order.isDelivered);
   return (
     <Layout title={`Order ${orderId}`}>
       <Typography component="h1" variant="h1">
@@ -369,7 +369,8 @@ function Order({ params }) {
                     )}
                   </ListItem>
                 )} */}
-                {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+
+                {userInfo.isAdmin && (
                   <ListItem>
                     {loadingDeliver && <CircularProgress />}
                     <Button
