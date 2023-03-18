@@ -26,7 +26,7 @@ import { getError } from "../../utils/error";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import Form from "../../components/Form";
-
+import Gallery from "../../components/Gallery";
 export default function ProductScreen(props) {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -90,7 +90,39 @@ export default function ProductScreen(props) {
     dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
     router.push("/cart");
   };
+  const items = [];
 
+  product.image
+    ? items.push({
+        original: product.image,
+        thumbnail: product.image,
+      })
+    : null;
+  product.image1
+    ? items.push({
+        original: product.image1,
+        thumbnail: product.image1,
+      })
+    : null;
+  product.image2
+    ? items.push({
+        original: product.image2,
+        thumbnail: product.image2,
+      })
+    : null;
+  product.image3
+    ? items.push({
+        original: product.image3,
+        thumbnail: product.image3,
+      })
+    : null;
+  product.image4
+    ? items.push({
+        original: product.image4,
+        thumbnail: product.image4,
+      })
+    : null;
+  console.log(items);
   return (
     <Layout title={product.name}>
       <Box sx={classes.section}>
@@ -102,7 +134,8 @@ export default function ProductScreen(props) {
       </Box>
       <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
-          <Carousel>
+          {items.length > 0 ? <Gallery items={items} /> : <></>}
+          {/**   <Carousel>
             <Image
               src={product.image}
               alt={product.name}
@@ -165,7 +198,7 @@ export default function ProductScreen(props) {
             ) : (
               <></>
             )}
-          </Carousel>
+          </Carousel>*/}
         </Grid>
         <Grid item md={3} xs={12}>
           <List>

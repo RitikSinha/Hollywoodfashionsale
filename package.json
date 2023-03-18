@@ -34,6 +34,7 @@
     "react-chartjs-2": "^3.2.0",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.17.5",
+    "react-image-gallery": "^1.2.11",
     "react-responsive-carousel": "^3.2.22",
     "shortid": "^2.2.16",
     "streamifier": "^0.1.1"

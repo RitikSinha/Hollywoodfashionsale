@@ -63,7 +63,7 @@ const classes = {
     fontWeight: "bold",
     fontSize: "1.2rem",
     textAlign: "center",
-    paddingRight: 19,
+    paddingRight: 24,
   },
   grow: {
     flexGrow: 1,
