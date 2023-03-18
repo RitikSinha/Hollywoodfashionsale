@@ -270,7 +270,7 @@ export default function Layout({ title, description, children }) {
             <Box sx={isDesktop ? classes.visible : classes.hidden}>
               <NextLink href="/" passHref>
                 <Link>
-                  <Typography sx={classes.brand}>Hollywood Fashion </Typography>
+                  <Typography sx={classes.brand}>Hollywood Fashion</Typography>
                 </Link>
               </NextLink>
             </Box>
