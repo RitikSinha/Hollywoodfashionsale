@@ -50,6 +50,7 @@ export default function Layout({ title, description, children }) {
 
   const theme = createTheme({
     shadows: ["none"],
+
     components: {
       MuiLink: {
         defaultProps: {
@@ -69,6 +70,7 @@ export default function Layout({ title, description, children }) {
         fontWeight: 400,
         margin: "1rem 0",
       },
+      fontFamily: "Inter",
     },
     palette: {
       mode: darkMode ? "dark" : "light",
@@ -154,8 +156,8 @@ export default function Layout({ title, description, children }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
 
-        <AppBar position="fixed" sx={classes.appbar} elevation={1}>
-          <Box sx={classes.titlebar} elevation={1}>
+        <AppBar position="fixed" sx={classes.appbar}>
+          <Box sx={classes.titlebar}>
             <Typography>Hollywood Fashion Sale</Typography>
           </Box>
           <Toolbar sx={classes.toolbar}>
@@ -270,7 +272,9 @@ export default function Layout({ title, description, children }) {
             <Box sx={isDesktop ? classes.visible : classes.hidden}>
               <NextLink href="/" passHref>
                 <Link>
-                  <Typography sx={classes.brand}>Hollywood Fashion</Typography>
+                  <Typography sx={classes.brand}>
+                    Hollywood Fashion Sale
+                  </Typography>
                 </Link>
               </NextLink>
             </Box>

@@ -62,6 +62,8 @@ const classes = {
   brand: {
     fontWeight: "bold",
     fontSize: "1.2rem",
+    textAlign: "center",
+    paddingRight: 19,
   },
   grow: {
     flexGrow: 1,
