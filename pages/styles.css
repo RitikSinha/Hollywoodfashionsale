@@ -3,8 +3,17 @@
 body {
   font-family: "Inter", sans-serif;
 }
+.featuredImage {
+  width: 100vw;
+}
 .margin {
   margin-top: 100px;
+}
+.category {
+  cursor: pointer;
+}
+.typo {
+  margin-bottom: 50px;
 }
 .footer {
   display: flex;
@@ -12,6 +21,8 @@ body {
   background-color: #000;
   align-items: center;
   justify-content: space-around;
+  margin-top: 50px;
+  padding-top: 50px;
 }
 .footer div {
   display: flex;
@@ -30,8 +41,24 @@ body {
 
 .icon-box {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
 }
-
+.copy-right {
+  text-align: center;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+}
+.community {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+}
 @media only screen and (max-width: 600px) {
   .footer {
     flex-direction: column;

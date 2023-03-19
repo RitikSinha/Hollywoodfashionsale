@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { Grid, Link, Typography, Avatar } from "@mui/material";
+import { Grid, Link, Typography } from "@mui/material";
 import Layout from "../components/Layout";
 import db from "../utils/db";
 import Product from "../models/Product";
@@ -51,6 +51,7 @@ export default function Home(props) {
               <Image
                 src={product.featuredImage}
                 alt={product.name}
+                className="featuredImage"
                 width={width}
                 height={height}
               />
@@ -58,8 +59,61 @@ export default function Home(props) {
           </NextLink>
         ))}
       </Carousel>
-
+      <Typography variant="h3" className="typo">
+        new Arrival
+      </Typography>
       <Grid container spacing={3}>
+        {newArrivalProducts.map((product) => (
+          <Grid item md={4} key={product.name}>
+            <ProductItem
+              product={product}
+              addToCartHandler={addToCartHandler}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Typography variant="h3" className="typo">
+        categories
+      </Typography>
+      <Grid container spacing={1} className="category">
+        <Grid item xs={4}>
+          <NextLink href="search?category=Jeans" passHref>
+            <Image
+              src={"/images/jeans.jpg"}
+              alt="jeans"
+              width={400}
+              height={600}
+            />
+          </NextLink>
+          <NextLink href="search?category=shoes" passHref>
+            <Image
+              src={"/images/shoes.jpg"}
+              alt="jeans"
+              width={400}
+              height={400}
+            />
+          </NextLink>
+        </Grid>
+        <Grid item xs={8}>
+          <NextLink href="search?category=shirts" passHref>
+            <Image
+              src={"/images/shirts.jpg"}
+              alt="shirts"
+              width={800}
+              height={500}
+            />
+          </NextLink>
+          <NextLink href="search?category=caps" passHref>
+            <Image
+              src={"/images/caps.jpg"}
+              alt="shirts"
+              width={800}
+              height={500}
+            />
+          </NextLink>
+        </Grid>
+      </Grid>
+      {/**<Grid container spacing={3}>
         <Grid item md={2}>
           <NextLink href="search?category=Jeans" passHref>
             <Avatar sx={{ bgcolor: "#121212", width: 100, height: 100 }}>
@@ -102,20 +156,11 @@ export default function Home(props) {
             </Avatar>
           </NextLink>
         </Grid>
-      </Grid>
+        </Grid>**/}
 
-      <Typography variant="h2">new Arrival</Typography>
-      <Grid container spacing={3}>
-        {newArrivalProducts.map((product) => (
-          <Grid item md={4} key={product.name}>
-            <ProductItem
-              product={product}
-              addToCartHandler={addToCartHandler}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      <Typography variant="h2">best sellers</Typography>
+      <Typography variant="h3" className="typo">
+        best sellers
+      </Typography>
       <Grid container spacing={3}>
         {topRatedProducts.map((product) => (
           <Grid item md={4} key={product.name}>

@@ -48,8 +48,8 @@ const classes = {
   },
   appbar: {
     backgroundColor: "#ffffff",
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-
+    borderBottom: "1px solid #d3d3d3",
+    color: "#121212",
     "& a": {
       color: "#121212",
       marginLeft: 1,

@@ -18,6 +18,10 @@ import NextLink from "next/link";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import {
   AppBar,
@@ -69,6 +73,9 @@ export default function Layout({ title, description, children }) {
         fontSize: "1.4rem",
         fontWeight: 400,
         margin: "1rem 0",
+      },
+      h3: {
+        margin: "2rem 0",
       },
       fontFamily: "Inter",
     },
@@ -356,6 +363,26 @@ export default function Layout({ title, description, children }) {
         <Box component="footer" sx={classes.footer}>
           <Footer />
         </Box>
+        <div className="community">
+          <h1>community exclusive</h1>
+        </div>
+        <div className="icon-box">
+          <a href="" target="_blank">
+            <FacebookOutlinedIcon />
+          </a>
+          <a href="" target="_blank">
+            <InstagramIcon />
+          </a>
+          <a href="" target="_blank">
+            <TwitterIcon />
+          </a>
+          <a href="" target="_blank">
+            <LinkedInIcon />
+          </a>
+        </div>
+        <div className="copy-right">
+          <p>© 2023 Hollywoodfashionsale.com. All Rights Reserved.</p>
+        </div>
       </ThemeProvider>
     </>
   );
